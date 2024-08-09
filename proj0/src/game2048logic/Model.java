@@ -177,26 +177,26 @@ public class Model {
         int myValue = currTile.value();
         int targetY = y;
         int mostEmpty = -1;
-        for(int j = y +1;j<length;j++){
-            if(board.tile(x,j) == null){
-                mostEmpty = j;
-                continue;
-            }else if(board.tile(x,j).value() == myValue){
-                board.move(x,j,currTile);
-                break;
-            }else if(board.tile(x,j).value() != myValue){
-                board.move(x,j-1,currTile);
-                break;
+        if(currTile != null){
+            for(int j = y +1;j<length;j++){
+                if(board.tile(x,j) == null){
+                    mostEmpty = j;
+                    continue;
+                }else if(board.tile(x,j).value() == myValue){
+                    board.move(x,j,currTile);
+
+                    break;
+                }else if(board.tile(x,j).value() != myValue){
+                    board.move(x,j-1,currTile);
+                    break;
+                }
+                return;
             }
-            return;
-        }
-        if(mostEmpty == length-1){
-            board.move(x, length - 1, currTile);
+            if(mostEmpty == length-1){
+                board.move(x, length - 1, currTile);
+            }
         }
     }
-
-
-
 
         // TODO: Tasks 5, 6, and 10. Fill in this function.
 
@@ -208,6 +208,14 @@ public class Model {
      * */
     public void tiltColumn(int x) {
         // TODO: Task 7. Fill in this function.
+        int length = board.size();
+        for(int y =length-2;y>=0;y--){
+            if (board.tile(x,y) != null){
+                moveTileUpAsFarAsPossible(x,y);
+            }else{
+                continue;
+            }
+        }
     }
 
     public void tilt(Side side) {
