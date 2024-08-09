@@ -127,6 +127,24 @@ public class Model {
      */
     public boolean atLeastOneMoveExists() {
         // TODO: Fill in this function.
+        int length = board.size();
+        if(emptySpaceExists()){
+            return true;
+        }else{
+            for (int i = 0; i < length; i++) {
+                for (int j = 0; j < length; j++) {
+                    if (board.tile(i, j) != null) { // Check if the tile is not null
+                        int value = board.tile(i, j).value(); // Safe to access value now
+                        int valueRight = board.tile(i, j+1).value();
+                        int valueUp = board.tile(i+1, j).value();
+                        if (value == valueRight || value == valueUp){
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        }
         return false;
     }
 
