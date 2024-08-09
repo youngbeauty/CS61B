@@ -135,10 +135,18 @@ public class Model {
                 for (int j = 0; j < length; j++) {
                     if (board.tile(i, j) != null) { // Check if the tile is not null
                         int value = board.tile(i, j).value(); // Safe to access value now
-                        int valueRight = board.tile(i, j+1).value();
-                        int valueUp = board.tile(i+1, j).value();
-                        if (value == valueRight || value == valueUp){
-                            return true;
+                        if(j + 1 < length && board.tile(i, j + 1) !=null){
+                            int valueRight = board.tile(i, j+1).value();
+                            if (value == valueRight){
+                                return true;
+                            }
+                        }
+
+                        if(i + 1 < length && board.tile(i+1, j) !=null){
+                            int valueUp = board.tile(i+1, j).value();
+                            if (value == valueUp){
+                                return true;
+                            }
                         }
                     }
                 }
