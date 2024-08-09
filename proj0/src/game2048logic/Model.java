@@ -135,6 +135,7 @@ public class Model {
                 for (int j = 0; j < length; j++) {
                     if (board.tile(i, j) != null) { // Check if the tile is not null
                         int value = board.tile(i, j).value(); // Safe to access value now
+
                         if(j + 1 < length && board.tile(i, j + 1) !=null){
                             int valueRight = board.tile(i, j+1).value();
                             if (value == valueRight){
@@ -171,12 +172,34 @@ public class Model {
      *    and the trailing tile does not.
      */
     public void moveTileUpAsFarAsPossible(int x, int y) {
+        int length = board.size();
         Tile currTile = board.tile(x, y);
         int myValue = currTile.value();
         int targetY = y;
+        int mostEmpty = -1;
+        for(int j = y +1;j<length;j++){
+            if(board.tile(x,j) == null){
+                mostEmpty = j;
+                continue;
+            }else if(board.tile(x,j).value() == myValue){
+                board.move(x,j,currTile);
+                break;
+            }else if(board.tile(x,j).value() != myValue){
+                board.move(x,j-1,currTile);
+                break;
+            }
+            return;
+        }
+        if(mostEmpty == length-1){
+            board.move(x, length - 1, currTile);
+        }
+    }
+
+
+
 
         // TODO: Tasks 5, 6, and 10. Fill in this function.
-    }
+
 
     /** Handles the movements of the tilt in column x of the board
      * by moving every tile in the column as far up as possible.

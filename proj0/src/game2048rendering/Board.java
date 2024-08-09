@@ -72,7 +72,7 @@ public class Board {
     }
 
     
-    /** Places the Tile TILE at column x, y y where x and y are
+    /** Places the Tile TILE at column x, y where x and y are
      * treated as coordinates with respect to the current viewPerspective.
      *
      * (0, 0) is bottom-left corner.
